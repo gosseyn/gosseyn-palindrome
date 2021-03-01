@@ -1,5 +1,6 @@
 
-
+// exporte l'objet Phrase
+module.exports = Phrase
 // Reverses a string
 
 /*function reverse(string) {
@@ -23,26 +24,42 @@ String.prototype.reverse = function reverse() {
 
 
 
-// transformer palindrome en méthode
+
 // Définition de l'objet Phrase :
 function Phrase(content){
     this.content = content;
+
+
+    // retourne les lettres du contenu
+    this.letters = function letters(){
+	return (this.content.match(/[a-z]/ig) || []).join("");
+/*	return Array.from(this.content).filter(c => c.match(/[a-z]/i)).join("");*/
+/*	let theLetters = [];
+	const letterRegexp = /[a-z]/i;
+	Array.from(this.content).forEach(function (character){
+	    if(character.match(letterRegexp)){
+		theLetters.push(character);
+	    }
+	});
+	return theLetters.join ("");*/
+    }
+	
     
     //Exercice : retourne une version en maj du contenu
     this.louder = function () {
         return this.content.toUpperCase();
     }
 
-      /* Exercice : fonction processor */
+      /* Exercice : fonction processor 
     this.processor = function processor(string) {
         return string.toLowerCase();
-    }
+    }*/ 
 
      /* et on refactorise */
 
     // Retourne le contenu formalisé pour le test palindrome
     this.processedContent  = function processedContent() {
-        return this.processor(content);
+        return this.letters().toLowerCase();
     }
     
     // retourne vraie si la Phrase est un palindrome
@@ -52,6 +69,15 @@ function Phrase(content){
 	return this.processedContent() === this.processedContent().reverse();
     }
 }
+
+/*
+// solution perso pour retourner seulement les lettres de content
+letters = /[A-Za-z]/;
+
+function lettres(chaine){
+    return Array.from(chaine).filter(elements => elements.match(letters));
+};
+*/
 
 
 /* function TranslatedPhrase(content, translation) {
@@ -64,6 +90,7 @@ function Phrase(content){
     }
 
 }
+
 
 TranslatedPhrase.prototype = new Phrase();
 
